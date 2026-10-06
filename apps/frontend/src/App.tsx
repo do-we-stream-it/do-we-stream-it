@@ -123,6 +123,7 @@ export function App() {
 
   return (
     <main className="page">
+      <div className="progress" aria-hidden="true" />
       <header className="hero">
         <p className="eyebrow">Do we stream it?</p>
         <h1>Neue Releases, <span className="grad">auf einen Blick.</span></h1>
