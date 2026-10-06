@@ -51,8 +51,9 @@ export const CATALOG: CatalogItem[] = rows.map(
   ([title, type, year, rating, genre, provider, description], i) => {
     const id = title.toLowerCase().replace(/\W+/g, '-');
     const local: Record<string, string> = {
-      'starcraft-terran-dawn': '/posters/starcraft-terran.jpg',
-      'starcraft-aiur-rising': '/posters/starcraft-protoss.jpg',
+      'starcraft-terran-dawn': '/posters/starcraft-terran.svg',
+      'starcraft-zerg-rush': '/posters/starcraft-zerg.svg',
+      'starcraft-aiur-rising': '/posters/starcraft-protoss.svg',
     };
     return { id, title, type, year, rating, genre, provider, description, poster: local[id] ?? `https://picsum.photos/seed/${id}-${i}/400/600` };
   },

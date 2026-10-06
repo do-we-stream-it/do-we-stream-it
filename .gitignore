@@ -6,3 +6,6 @@ dist/
 !.env.example
 *.log
 .DS_Store
+
+# third-party artwork, local use only
+apps/frontend/public/posters/*.jpg
