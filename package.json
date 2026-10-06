@@ -1,0 +1,26 @@
+{
+  "name": "do-we-stream-it",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=11.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others --names backend,frontend --prefix-colors cyan,magenta \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm run dev --workspace @do-we-stream-it/backend",
+    "dev:frontend": "npm run dev --workspace @do-we-stream-it/frontend",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "start": "npm run start --workspace @do-we-stream-it/backend"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  },
+  "overrides": {
+    "shell-quote": "^1.12.0"
+  }
+}
