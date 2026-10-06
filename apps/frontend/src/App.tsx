@@ -1,4 +1,5 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react';
+import { Catalog } from './Catalog';
 import {
   type JobStatus,
   type Release,
@@ -122,9 +123,10 @@ export function App() {
 
   return (
     <main className="page">
-      <header>
+      <header className="hero">
         <p className="eyebrow">Do we stream it?</p>
-        <h1>Neue Releases, auf einen Blick.</h1>
+        <h1>Neue Releases, <span className="grad">auf einen Blick.</span></h1>
+        <p className="lead">Finde heraus, was wo startet – Film oder Serie, Netflix bis Max.</p>
       </header>
 
       <form className="panel controls" onSubmit={onSubmit}>
@@ -177,6 +179,8 @@ export function App() {
       )}
 
       {results && !jobError && <ResultList results={results} />}
+
+      <Catalog />
     </main>
   );
 }
