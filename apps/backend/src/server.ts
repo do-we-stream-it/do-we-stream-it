@@ -1,7 +1,6 @@
 import { buildApp } from './app.js';
-import { createMockDependencies } from './mock/index.js';
 
-const app = buildApp({ dependencies: createMockDependencies() });
+const app = buildApp();
 const host = process.env.HOST ?? '127.0.0.1';
 const port = Number(process.env.PORT ?? '3000');
 
