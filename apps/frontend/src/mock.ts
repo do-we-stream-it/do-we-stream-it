@@ -50,6 +50,10 @@ const rows: [string, 'movie' | 'series', number, number, string, ProviderId, str
 export const CATALOG: CatalogItem[] = rows.map(
   ([title, type, year, rating, genre, provider, description], i) => {
     const id = title.toLowerCase().replace(/\W+/g, '-');
-    return { id, title, type, year, rating, genre, provider, description, poster: `https://picsum.photos/seed/${id}-${i}/400/600` };
+    const local: Record<string, string> = {
+      'starcraft-terran-dawn': '/posters/starcraft-terran.jpg',
+      'starcraft-aiur-rising': '/posters/starcraft-protoss.jpg',
+    };
+    return { id, title, type, year, rating, genre, provider, description, poster: local[id] ?? `https://picsum.photos/seed/${id}-${i}/400/600` };
   },
 );
