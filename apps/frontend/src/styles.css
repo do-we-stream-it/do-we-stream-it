@@ -109,3 +109,26 @@ body { background: radial-gradient(900px 400px at 15% -10%, color-mix(in srgb, v
 .detail-body h2 { margin: 10px 0 4px; font-size: 28px; }
 .answer { padding: 10px 14px; border-radius: 10px; background: color-mix(in srgb, var(--ok) 12%, transparent); }
 @media (max-width: 560px) { .detail-body { grid-template-columns: 1fr; } .detail-body img { max-width: 160px; } .rank { font-size: 80px; } }
+
+/* --- responsive fixes --- */
+html { overflow-x: hidden; }
+.page > * { min-width: 0; } /* grid items must not grow with the scrolling Top-10 row */
+.controls, .alert, .status-area { max-width: min(720px, 100%); }
+.detail { max-height: 90dvh; overflow-y: auto; }
+.trend { margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
+@media (max-width: 640px) {
+  .page { padding: 20px 16px 48px; gap: 16px; }
+  .spotlight { min-height: 340px; border-radius: 18px; }
+  .spot-copy { max-width: none; width: 100%; background: linear-gradient(0deg, rgb(0 0 0 / .75), transparent); padding-top: 80px; }
+  .toolbar > * { flex: 1 1 100%; }
+  .filters { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px; padding: 0 16px 4px; scrollbar-width: none; }
+  .filters .chip { flex: 0 0 auto; }
+  .sep { display: none; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
+  .overlay { display: none; } /* no hover on touch; details live in the dialog */
+  .detail-body { padding: 18px; gap: 16px; }
+  .trend button { width: 110px; }
+  .rank { font-size: 72px; margin-right: -16px; }
+  button, input, select { min-height: 44px; }
+  .heart { width: 40px; height: 40px; min-height: 0; }
+}
