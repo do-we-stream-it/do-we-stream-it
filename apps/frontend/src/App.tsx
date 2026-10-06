@@ -1,5 +1,6 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { Catalog } from './Catalog';
+import { DarkDropsModal } from './game/DarkDropsModal';
 import {
   type JobStatus,
   type Release,
@@ -30,6 +31,7 @@ export function App() {
   const [loading, setLoading] = useState(false);
   const [starting, setStarting] = useState(false);
   const [netError, setNetError] = useState<string | null>(null);
+  const [gameOpen, setGameOpen] = useState(false);
   // Bumped on every user action; responses of older actions are dropped.
   const seq = useRef(0);
   const queryAbort = useRef<AbortController | null>(null);
@@ -85,10 +87,10 @@ export function App() {
     setNetError(null);
     setJobError(null);
     try {
-      const { jobId } = await startJob(date, country);
+      const { job: created } = await startJob(date, country);
       if (seq.current !== id) return;
       setResults(null);
-      setJob({ id: jobId, date, country, status: 'queued' });
+      setJob({ id: created.id, date, country, status: 'queued' });
     } catch {
       if (seq.current === id)
         setNetError('Der Scraper konnte nicht gestartet werden. Bitte erneut versuchen.');
@@ -182,6 +184,14 @@ export function App() {
       {results && !jobError && <ResultList results={results} />}
 
       <Catalog />
+
+      <section className="game-teaser" aria-labelledby="game-teaser-title">
+        <p className="eyebrow">DESERT STRIKES · EASTER EGG</p>
+        <h2 id="game-teaser-title">Dark Drops</h2>
+        <p>Während die Streams warten, gehört die Wüste dir. Weiche den Drops aus und überlebe 30 Sekunden.</p>
+        <button id="dark-drops-launch" type="button" onClick={() => setGameOpen(true)}>Dark Drops spielen →</button>
+      </section>
+      {gameOpen && <DarkDropsModal onClose={() => setGameOpen(false)} />}
     </main>
   );
 }
@@ -203,11 +213,9 @@ function ResultList({ results }: { results: Results }) {
         {releases.map((r) => (
           <li key={r.id} className="panel release">
             <div>
-              <a href={r.sourceUrl} target="_blank" rel="noreferrer">
-                {r.title}
-              </a>
+              <strong>{r.title}</strong>
               <p className="muted">
-                {r.releaseDate} · {r.country}
+                {r.platform} · {r.date} · {r.country}
               </p>
             </div>
             <span className="tag">{r.type === 'movie' ? 'Film' : 'Serie'}</span>

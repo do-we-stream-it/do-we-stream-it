@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, expect, test, vi } from 'vitest';
 import { App } from './App';
 
-const rel = { id: '1', title: 'Dune', type: 'movie', releaseDate: '2026-10-06', country: 'DE', sourceUrl: 'https://x.test' };
+const rel = { id: '1', title: 'Dune', type: 'movie', platform: 'Max', date: '2026-10-06', country: 'DE' };
 const ok = (body: unknown) => Promise.resolve(new Response(JSON.stringify(body)));
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 
@@ -19,13 +19,13 @@ test('start → succeeded → shows releases; two clicks = two jobs', async () =
   let n = 0;
   const fn = mock((url, init) =>
     init?.method === 'POST'
-      ? ok({ jobId: `j${++n}` })
+      ? ok({ job: { id: `j${++n}`, status: 'queued' } })
       : ok({ job: { id: 'j', status: 'succeeded' }, releases: [rel] }),
   );
   render(<App />);
   const user = userEvent.setup();
   await user.click(screen.getByRole('button', { name: 'Start Scraper' }));
-  expect(await screen.findByRole('link', { name: 'Dune' })).toBeTruthy();
+  expect(await screen.findByText('Dune')).toBeTruthy();
   await user.click(screen.getByRole('button', { name: 'Start Scraper' }));
   await waitFor(() => expect(posts(fn)).toBe(2));
 });
@@ -39,7 +39,7 @@ test('zero results', async () => {
 
 test('failed job', async () => {
   mock((_u, init) =>
-    init?.method === 'POST' ? ok({ jobId: 'j' }) : ok({ job: { id: 'j', status: 'failed', error: 'Quelle down' }, releases: [] }),
+    init?.method === 'POST' ? ok({ job: { id: 'j', status: 'queued' } }) : ok({ job: { id: 'j', status: 'failed', error: 'Quelle down' }, releases: [] }),
   );
   render(<App />);
   await userEvent.click(screen.getByRole('button', { name: 'Start Scraper' }));
@@ -66,5 +66,5 @@ test('late response does not overwrite newer query', async () => {
   expect(await screen.findByText('Keine Releases gefunden.')).toBeTruthy();
   resolvers[0]?.(new Response(JSON.stringify({ releases: [rel] })));
   await new Promise((r) => setTimeout(r, 20));
-  expect(screen.queryByRole('link', { name: 'Dune' })).toBeNull();
+  expect(screen.queryByText('Dune')).toBeNull();
 });

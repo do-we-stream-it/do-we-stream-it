@@ -1,17 +1,27 @@
-// ponytail: local DTOs until the shared contracts from #1 land; swap these imports then.
 export type JobStatus = 'queued' | 'running' | 'succeeded' | 'failed';
 
+export interface Job {
+  id: string;
+  date: string;
+  country: string;
+  status: JobStatus;
+  error?: string;
+}
+
+// Mirrors ReleaseDto in apps/backend/src/contracts.ts (provisional until #1's shared package).
 export interface Release {
   id: string;
   title: string;
   type: 'movie' | 'series';
-  releaseDate: string;
+  platform: string;
+  date: string;
   country: string;
-  sourceUrl: string;
 }
 
 export interface ReleasesResponse {
-  job?: { id: string; status: JobStatus; error?: string };
+  date: string;
+  country: string;
+  job: Job | null;
   releases: Release[];
 }
 
@@ -26,7 +36,7 @@ export const startJob = (date: string, country: string, signal: AbortSignal | nu
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ date, country }),
     signal,
-  }).then((r) => json<{ jobId: string }>(r));
+  }).then((r) => json<{ job: Job }>(r));
 
 export const getReleases = (
   date: string,
