@@ -1,0 +1,134 @@
+{
+  "totalItems": 18,
+  "current": 1,
+  "totalPages": 1,
+  "perPage": 20,
+  "data": [
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1790868600000,
+      "title1": "The Ramparts of Ice",
+      "videoID": 82147777
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1791046800000,
+      "title1": "Ranma1/2",
+      "videoID": 82696841
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1791270000000,
+      "title1": "Love Village",
+      "videoID": 81948247
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1791442800000,
+      "title1": "Unicorn Academy: Enthüllte Geheimnisse",
+      "videoID": 81773742
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1791442800000,
+      "title1": "Below",
+      "videoID": 81652678
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1791532800000,
+      "title1": "Take Charge of My Heart",
+      "videoID": 82016403
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1791556200000,
+      "title1": "Doctor X: Mafia in White",
+      "videoID": 82682380
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1791874800000,
+      "title1": "Die Falle",
+      "videoID": 81720672
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1791874800000,
+      "title1": "TYSON",
+      "videoID": 81780624
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1792134000000,
+      "title1": "Krumme Dinger am Bosporus",
+      "videoID": 82047950
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1792566000000,
+      "title1": "Das neue Stanford-Prison-Experiment",
+      "videoID": 81930790
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1792598400000,
+      "title1": "Six Kings Slam",
+      "videoID": 82923340
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1792652400000,
+      "title1": "Nobody Wants This",
+      "videoID": 82052145
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1792738800000,
+      "title1": "Der Grande de España",
+      "videoID": 81702551
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1792738800000,
+      "title1": "Lupin",
+      "videoID": 81423428
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1793257200000,
+      "title1": "Balaraw: Blood Island",
+      "videoID": 81704899
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1793343600000,
+      "title1": "Haustausch",
+      "videoID": 81944881
+    },
+    {
+      "collection": 2170013,
+      "country": "DE",
+      "startTime": 1793347200000,
+      "title1": "Dead-End Job",
+      "videoID": 81997888
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@do-we-stream-it/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=../../.env --env-file-if-exists=.env src/main.ts",
+    "start": "node --env-file-if-exists=../../.env --env-file-if-exists=.env dist/main.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "enqueue": "node --env-file-if-exists=../../.env --env-file-if-exists=.env --import tsx src/enqueue.ts",
+    "preview-source": "node --env-file-if-exists=../../.env --env-file-if-exists=.env --import tsx src/preview.ts",
+    "test": "tsx --test test/*.test.ts",
+    "test:integration": "tsx --test test/integration/*.test.ts"
+  },
+  "dependencies": {
+    "@do-we-stream-it/scraper-queue": "*",
+    "bullmq": "^6.3.11",
+    "ioredis": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

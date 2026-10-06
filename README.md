@@ -41,7 +41,7 @@ Weitere Streaming-Anbieter können später über zusätzliche Quellen ergänzt w
 | Fastify-Backend mit TypeScript | Vorhanden; Health-Endpunkt und zwei fachliche API-Endpunkte |
 | Jobs starten und nach Datum/Region abfragen | Vorhanden, mit injizierbaren Mock-Abhängigkeiten |
 | MongoDB-Persistenz und gemeinsame Datenverträge | Geplant in [Issue #1](https://github.com/do-we-stream-it/do-we-stream-it/issues/1) |
-| Echter Netflix-Scraper und Queue-Worker | Separate Arbeit in [Issue #2](https://github.com/do-we-stream-it/do-we-stream-it/issues/2); hier noch nicht integriert |
+| Echter Netflix-Scraper und Queue-Worker | In `apps/worker` implementiert; produktiver Start benötigt das Datenbank-Paket aus [Issue #1](https://github.com/do-we-stream-it/do-we-stream-it/issues/1) |
 | Start-Button, Jobstatus und Release-Ergebnisse im Frontend | Geplant in [Issue #4](https://github.com/do-we-stream-it/do-we-stream-it/issues/4) |
 | Desert Strikes / Dark Drops | Spielbares Canvas-Minigame im Modal, mit sichtbarem Einstieg |
 
@@ -230,17 +230,31 @@ apps/
     tests/
       game.test.ts    # Spielzustände, Bewegung, Kollisionen und Punkte
     vite.config.ts    # Vite und API-Proxy
+  worker/             # Netflix-Scraper, Queue-Consumer und Hilfsskripte
+packages/
+  scraper-queue/      # Wiederverwendbarer Queue-Produzent für die API
 package.json          # npm Workspaces und gemeinsame Befehle
 tsconfig.base.json    # Gemeinsame TypeScript-Einstellungen
 ```
 
 ## Entwicklung und Qualität
 
+Der Scraper kann unabhängig von MongoDB mit
+`npm run scraper:preview -- --date YYYY-MM-DD --country DE` ausprobiert werden.
+Worker-Start, Queue-Produzent, Quellen-Grenzen und der vereinbarte
+Datenbank-Vertrag sind in [apps/worker/README.md](apps/worker/README.md) dokumentiert.
+Die API verwendet weiterhin ihre Demo-Queue, bis die Persistenz und der
+Queue-Produzent dort angebunden sind.
+
 | Befehl | Zweck |
 | --- | --- |
 | `npm run dev` | Backend und Frontend parallel starten |
 | `npm run dev:backend` | Backend separat starten |
 | `npm run dev:frontend` | Frontend separat starten |
+| `npm run dev:worker` | Queue-Paket bauen und Worker starten; benötigt Issue #1 |
+| `npm run start:worker` | Den bereits gebauten Worker starten; benötigt Issue #1 |
+| `npm run test:worker` | Scraper-, Worker- und Queue-Verträge ohne Infrastruktur prüfen |
+| `npm run test:worker:integration` | Queue-Verarbeitung mit echtem Redis prüfen (`REDIS_TEST_URL`) |
 | `npm run typecheck` | TypeScript in beiden Workspaces prüfen |
 | `npm test --workspace @do-we-stream-it/backend` | Backend-API-Tests ausführen |
 | `npm test --workspace @do-we-stream-it/frontend` | Minigame-Simulation prüfen |

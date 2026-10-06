@@ -1,0 +1,57 @@
+{
+  "totalItems": 7,
+  "current": 1,
+  "totalPages": 1,
+  "perPage": 20,
+  "data": [
+    {
+      "collection": 2694103,
+      "country": "DE",
+      "startTime": 1790924400000,
+      "title1": "Doing Life",
+      "videoID": 82023496
+    },
+    {
+      "collection": 2694103,
+      "country": "DE",
+      "startTime": 1791356400000,
+      "title1": "Mniej obcy",
+      "videoID": 81744789
+    },
+    {
+      "collection": 2694103,
+      "country": "DE",
+      "startTime": 1791356400000,
+      "title1": "Who Is Martin Mull?",
+      "videoID": 81922437
+    },
+    {
+      "collection": 2694103,
+      "country": "DE",
+      "startTime": 1791529200000,
+      "title1": "Animals",
+      "videoID": 81757047
+    },
+    {
+      "collection": 2694103,
+      "country": "DE",
+      "startTime": 1792134000000,
+      "title1": "Lo dejamos acá",
+      "videoID": 82027563
+    },
+    {
+      "collection": 2694103,
+      "country": "DE",
+      "startTime": 1792134000000,
+      "title1": "Seriously Single Too",
+      "videoID": 81645163
+    },
+    {
+      "collection": 2694103,
+      "country": "DE",
+      "startTime": 1793343600000,
+      "title1": "SCTV: The Greatest Show You've Never Heard Of",
+      "videoID": 82059675
+    }
+  ]
+}

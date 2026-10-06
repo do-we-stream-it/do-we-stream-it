@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
+    "packages/*",
     "apps/*"
   ],
   "engines": {
@@ -13,8 +14,14 @@
     "dev": "concurrently --kill-others --names backend,frontend --prefix-colors cyan,magenta \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "npm run dev --workspace @do-we-stream-it/backend",
     "dev:frontend": "npm run dev --workspace @do-we-stream-it/frontend",
+    "dev:worker": "npm run build --workspace @do-we-stream-it/scraper-queue && npm run dev --workspace @do-we-stream-it/worker",
+    "start:worker": "npm run start --workspace @do-we-stream-it/worker",
+    "scraper:enqueue": "npm run build --workspace @do-we-stream-it/scraper-queue && npm run enqueue --workspace @do-we-stream-it/worker --",
+    "scraper:preview": "npm run build --workspace @do-we-stream-it/scraper-queue && npm run preview-source --workspace @do-we-stream-it/worker --",
     "build": "npm run build --workspaces",
-    "typecheck": "npm run typecheck --workspaces",
+    "typecheck": "npm run build --workspace @do-we-stream-it/scraper-queue && npm run typecheck --workspaces",
+    "test:worker": "npm run build --workspace @do-we-stream-it/scraper-queue && npm run test --workspace @do-we-stream-it/scraper-queue && npm run test --workspace @do-we-stream-it/worker",
+    "test:worker:integration": "npm run build --workspace @do-we-stream-it/scraper-queue && npm run test:integration --workspace @do-we-stream-it/worker",
     "start": "npm run start --workspace @do-we-stream-it/backend"
   },
   "devDependencies": {
