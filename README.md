@@ -23,6 +23,44 @@ Die Startseite zeigt den Backend-Status an. Vite leitet `/api`-Anfragen an
 das Backend weiter. Beide Anwendungen laden Änderungen automatisch neu.
 Mit `Ctrl+C` werden beide Entwicklungsprozesse beendet.
 
+## API
+
+Alle Endpunkte sind ohne Login nutzbar. Fehler haben die Form
+`{ "error": { "code", "message", "jobId"? } }`; interne Details werden nur geloggt.
+
+Der Scraper, die Queue und die Datenbank sind aktuell **gemockt**
+(`apps/backend/src/mock/`): Jobs werden im Speicher gehalten und nach ca. 0,5 s
+von einem Fake-Scraper im selben Prozess abgeschlossen. Die Schnittstellen
+`Repository` und `Queue` stehen in `src/contracts.ts` und werden in `buildApp`
+injiziert.
+
+### Job starten
+
+`POST /api/scraper/jobs` mit optionalem Body `{ "date": "YYYY-MM-DD", "country": "DE" }`
+(Standard: heutiger UTC-Tag und `DE`). Antwort `202` nach bestätigtem Enqueue,
+`503 ENQUEUE_FAILED` (mit `jobId`, Job ist dann `failed`) sonst.
+
+```sh
+curl -X POST http://127.0.0.1:3000/api/scraper/jobs \
+  -H 'content-type: application/json' -d '{"date":"2026-05-01","country":"DE"}'
+# {"job":{"id":"<uuid>","status":"queued",...}}
+```
+
+### Releases lesen und Job pollen
+
+`GET /api/releases?date=YYYY-MM-DD&country=DE&jobId=<UUID>` liefert
+`{ date, country, job, releases }`. `jobId` ist optional (sonst `job: null`);
+unbekannte ID → `404 JOB_NOT_FOUND`, abweichendes Datum/Region → `400`.
+Der Endpunkt startet nie einen Scraper.
+
+```sh
+curl 'http://127.0.0.1:3000/api/releases?date=2026-05-01&country=DE'
+# Polling, bis job.status "succeeded" oder "failed" ist:
+curl 'http://127.0.0.1:3000/api/releases?date=2026-05-01&country=DE&jobId=<uuid>'
+```
+
+Backend-Tests: `npm test --workspace @do-we-stream-it/backend`.
+
 ## Struktur
 
 ```text
@@ -58,7 +96,7 @@ cp apps/backend/.env.example apps/backend/.env
 cp apps/frontend/.env.example apps/frontend/.env
 ```
 
-Das Backend liest `HOST` und `PORT` aus seiner `.env`. `API_PROXY_TARGET` in
+Das Backend liest `HOST` und `PORT` (weitere Variablen für MongoDB/Queue folgen mit den Tickets #1/#2) aus seiner `.env`. `API_PROXY_TARGET` in
 der Frontend-`.env` legt das Ziel des Vite-Proxys fest. Falls sich der Backend-Port
 ändert, das Proxy-Ziel entsprechend anpassen. Ohne `.env` gelten die oben genannten
 Standardadressen.
