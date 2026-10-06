@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { DarkDropsModal } from './game/DarkDropsModal';
 
 type ApiStatus = 'loading' | 'online' | 'offline';
 
@@ -11,6 +12,7 @@ const statusLabels: Record<ApiStatus, string> = {
 export function App() {
   const [status, setStatus] = useState<ApiStatus>('loading');
   const [attempt, setAttempt] = useState(0);
+  const [gameOpen, setGameOpen] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -70,6 +72,13 @@ export function App() {
           Verbindung prüfen
         </button>
       </div>
+      <section className="game-teaser" aria-labelledby="game-teaser-title">
+        <p className="eyebrow">DESERT STRIKES · EASTER EGG</p>
+        <h2 id="game-teaser-title">Dark Drops</h2>
+        <p>Während die Streams warten, gehört die Wüste dir. Weiche den Drops aus und überlebe 30 Sekunden.</p>
+        <button id="dark-drops-launch" type="button" onClick={() => setGameOpen(true)}>Dark Drops spielen →</button>
+      </section>
+      {gameOpen && <DarkDropsModal onClose={() => setGameOpen(false)} />}
     </main>
   );
 }
