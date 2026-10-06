@@ -132,3 +132,12 @@ html { overflow-x: hidden; }
   button, input, select { min-height: 44px; }
   .heart { width: 40px; height: 40px; min-height: 0; }
 }
+
+/* Top 10: wrapping grid instead of a scroll container */
+.trend { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px 12px; overflow: visible; margin-inline: 0; padding: 0; scroll-snap-type: none; }
+.trend li { scroll-snap-align: none; }
+.trend button { width: 100%; flex: 1; }
+@media (max-width: 640px) {
+  .trend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trend button { width: 100%; }
+}
