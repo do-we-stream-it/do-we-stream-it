@@ -42,6 +42,9 @@ const rows: [string, 'movie' | 'series', number, number, string, ProviderId, str
   ['Dead Air', 'movie', 2026, 7.5, 'Horror', 'netflix', 'Ein Nachtradio-Moderator bekommt Anrufe von Menschen, die es nicht mehr gibt.'],
   ['Northern Lines', 'series', 2026, 8.2, 'Drama', 'paramount', 'Fünf Familien, ein Zugnetz und ein Winter, der nicht endet.'],
   ['Afterglow', 'movie', 2026, 7.7, 'Musik', 'apple', 'Eine verblasste Popsängerin wagt in Berlin das Comeback.'],
+  ['StarCraft: Terran Dawn', 'series', 2026, 8.8, 'Sci-Fi', 'max', 'Marines, Marauder und ein Kommandant, der am Rand des Koprulu-Sektors die letzte Kolonie hält. (Fan-Mock)'],
+  ['StarCraft: Zerg Rush', 'movie', 2026, 7.9, 'Sci-Fi', 'netflix', 'Der Schwarm kommt in der sechsten Minute – und niemand hat Bunker gebaut. (Fan-Mock)'],
+  ['StarCraft: Aiur Rising', 'series', 2026, 8.6, 'Sci-Fi', 'prime', 'Die Protoss kämpfen um ihre Heimat, bevor die Khala endgültig verstummt. (Fan-Mock)'],
 ];
 
 export const CATALOG: CatalogItem[] = rows.map(

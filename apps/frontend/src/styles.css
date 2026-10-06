@@ -141,3 +141,5 @@ html { overflow-x: hidden; }
   .trend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .trend button { width: 100%; }
 }
+
+.egg { margin: 0 0 12px; padding: 10px 14px; border-radius: 10px; font-weight: 700; color: #67e8f9; background: #0b1b2b; border: 1px solid #22d3ee; animation: rise .3s both; }

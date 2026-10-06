@@ -174,6 +174,9 @@ export function Catalog() {
           </select>
           <button type="button" className="chip" aria-pressed={onlyFav} onClick={() => setOnlyFav((v) => !v)}>♥ Merkliste ({fav.length})</button>
         </div>
+        {q.trim().toLowerCase().includes('starcraft') && (
+          <p className="egg" role="status">⚠ You must construct additional pylons.</p>
+        )}
         <div className="filters" role="group" aria-label="Filter">
           {(['all', ...Object.keys(PROVIDERS)] as const).map((id) => (
             <button key={id} type="button" className="chip" aria-pressed={provider === id} onClick={() => setProvider(id as ProviderId | 'all')}>
